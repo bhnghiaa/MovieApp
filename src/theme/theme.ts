@@ -19,6 +19,7 @@ interface Color {
   Background_item: string;
   Background_input: string;
   textcolor:string;
+  buttoncolor:string;
 }
 
 export const COLORS: Color = {
@@ -40,7 +41,8 @@ export const COLORS: Color = {
   Background_nav: '#525B7A',
   Background_item: '#9FD5DF',
   Background_input:'#EFF0F5',
-  textcolor:'#606165'
+  textcolor:'#606165',
+  buttoncolor:'#45506B',
 };
 
 

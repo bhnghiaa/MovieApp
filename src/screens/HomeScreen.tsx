@@ -6,6 +6,7 @@ import { upcomingMovies, popularMovies, nowPlayingMovies, searchMovies, baseImag
 import InputHeader from '../components/InputHeader';
 import CategoryHeader from '../components/CategoryHeader';
 import MovieCard from '../components/MovieCard';
+import NowplayingCard from '../components/NowplayingCard';
 import { COLORS } from '../theme/theme';
 
 // lấy kích thước của màn hình
@@ -39,8 +40,6 @@ const getupcomingMoviesList = async () => {
         console.log("error");
     }
 }
-
-
 
 const HomeScreen = ({ navigation }: any) => {
     const [ nowPlayingMoviesList, setNowPlayingMoviesList ] = useState<any>(undefined);
@@ -117,20 +116,22 @@ const HomeScreen = ({ navigation }: any) => {
                     bounces={false}
                     data={nowPlayingMoviesList}
                     keyExtractor={(item: any) => item.id}
-                    contentContainerStyle={[ styles.containerGap, { minHeight: height / 3.2 } ]}
+                    contentContainerStyle={[ styles.containerGap, ]}
                     renderItem={({ item, index }) => (
-                        <MovieCard
+                        <NowplayingCard
                             cardFunction={() => {
                                 navigation.push('MovieDetails', { movieid: item.id });
                                 console.log(item.id);
                             }}
-                            cardWidth={width / 2.6}
+                            cardWidth={width * 0.8}
                             title={item.title}
-                            imagePath={baseImage('w342', item.poster_path)}
+                            rate={item.vote_average}
+                            voteCount={item.vote_count}
+                            imagePath={baseImage('w500', item.poster_path)}
                         />
                     )}
                 />
-                <CategoryHeader title={'Popular'} style={styles.category}></CategoryHeader>
+                {/* <CategoryHeader title={'Popular'} style={styles.category}></CategoryHeader>
                 <FlatList
                     horizontal
                     bounces={false}
@@ -147,7 +148,7 @@ const HomeScreen = ({ navigation }: any) => {
                             imagePath={baseImage('w342', item.poster_path)}
                         />
                     )}
-                />
+                /> */}
                 <CategoryHeader title={'Comming Soon'} style={styles.category}></CategoryHeader>
                 <FlatList
                     horizontal
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         gap: 20,
         flexGrow: 1,
+
     },
     category: {
         display: 'flex',
